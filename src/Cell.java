@@ -4,21 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Cell extends JButton implements ActionListener {
-    static String player;
+    Game game = new Game();
 
     public Cell(String cellNum) {
         super(" ");
         setFocusPainted(false);
-        setName(String.format("Button%s", cellNum));
+        setName(String.format("%s", cellNum));
         addActionListener(this);
-        player = "X";
-
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.setText(player);
-        player = player.equals("X") ? "O" : "X";
+        String cellName = this.getName();
+        game.takeTurn(cellName);
     }
 }
