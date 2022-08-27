@@ -19,4 +19,5 @@ public class Cell extends JButton implements ActionListener {
         String cellName = this.getName();
         game.takeTurn(cellName);
     }
+
 }

@@ -8,7 +8,7 @@ public class Game {
         this.boardSlots = BoardSlots.getInstance();
     }
 
-    public void takeTurn(String cellName) { // cellName = ButtonA6
+    public void takeTurn(String cellName) {
         BoardSlot selectedBoardSlot = boardSlots.getBoardSlot(cellName);
         BoardSlot nextOpenBoardSlot = boardSlots.getNextOpenSlot(selectedBoardSlot);
         if (null != nextOpenBoardSlot) {
