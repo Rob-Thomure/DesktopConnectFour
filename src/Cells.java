@@ -1,9 +1,10 @@
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Cells {
     private static Cells cellsInstance = null;
-    private final Map<String, Cell2> cellsMap;
+    private final Map<String, Cell> cellsMap;
 
     private Cells() {
         this.cellsMap = new HashMap<>();
@@ -16,23 +17,32 @@ public class Cells {
         return cellsInstance;
     }
 
-    public void addCell(Cell2 cell) {
-        cellsMap.put(cell.getCellNum(), cell);
+    public void addCell(Cell cell) {
+        cellsMap.put(cell.getCellName(), cell);
     }
 
-    public Cell2 getCell(String slot) {
+    public Cell getCell(String slot) {
         return cellsMap.get(slot);
     }
 
-    public Cell2 getNextOpenCell(BoardSlot selectedBoardSlot) {
-        String column = selectedBoardSlot.getColumn();
+    public Cell getNextOpenCell(Cell selectedCell) {
+        String column = selectedCell.getColumn();
         for (int i = 1; i < 7; i++) {
-            String boardSlotToCheck = String.format("Button%s%s", column, i);
-            Cell2 boardSlot = cellsMap.get(boardSlotToCheck);
-            if (boardSlot.getStatus().equals(SlotStatus.OPEN)) {
-                return boardSlot;
+            String CellToCheck = String.format("Button%s%s", column, i);
+            Cell cell = cellsMap.get(CellToCheck);
+            if (cell.getStatus().equals(CellStatus.OPEN)) {
+                return cell;
             }
         }
         return null;
+    }
+
+    public void resetGame() {
+        for (Cell cell : cellsMap.values()) {
+            cell.setText(" ");
+            cell.resetStatus();
+            cell.setBackground(Color.WHITE);
+            PlayerTurn.getInstance().reset();
+        }
     }
 }

@@ -9,9 +9,8 @@ public class ButtonReset extends JButton implements ActionListener {
         addActionListener(this);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        Cells.getInstance().resetGame();
     }
 }
